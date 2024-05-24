@@ -1,0 +1,36 @@
+train:
+  data:
+    data_path: datasets/dataset_ft.csv
+    data_limit: null
+    batch_size: 128
+    tokenizer: null
+    max_length: 100
+    min_freq: 2
+    max_freq: 0.5
+    train_val_test_split: !!python/tuple [0.7,  0.15, 0.15]
+    num_workers: 0
+    pin_memory: true
+
+  model:
+    model_name: BERT
+    output_size: 1
+    embedding_size: 256
+    hidden_size: 512
+
+  trainer:
+    learning_rate: 1.e-6
+    num_epochs: 50
+    checkpoint: null
+
+  callback:
+    checkpoint:
+      enable: true
+      dirpath: null
+      save_top_k: 2
+      save_last: true
+    earlystopping:
+      enable: true
+      patience: 5
+
+test:
+  checkpoint: lightning_logs/BERT/checkpoints/best.ckpt
